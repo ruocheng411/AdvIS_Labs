@@ -8,12 +8,12 @@ import java.awt.Shape;
 
 public class TextNode extends Node {
 
-	private Rectangle bounds;
+//	private Rectangle bounds;
 	private Font font;
 	protected int width;
 	protected int height;
-	public Color boundColor;
-	public double thickness;
+//	public Color boundColor;
+//	public double thickness;
 	
 	public TextNode(int w, int h) {
 		// TODO Auto-generated constructor stub
@@ -32,6 +32,12 @@ public class TextNode extends Node {
 	public void setTextFont(String string) {
 		s2 = string;
 		font  = new Font(s2, Font.PLAIN, ((int) thickness) * 18);
+		
+	}
+	
+	public void setThickness(double thickenss) {
+		this.thickness = thickenss;
+		System.out.println("thickness "+ thickness);
 	}
 
 	@Override 
@@ -45,7 +51,8 @@ public class TextNode extends Node {
 		Graphics2D g2d = (Graphics2D) graphics2d.create();
 
 		g2d.setPaint(boundsColor);
-		g2d.setFont(font);
+//		g2d.setFont(font);
+		g2d.setFont(new Font(s2, Font.PLAIN, ((int) thickness) * 18));
 //		g2d.setTransform(affineTransform);
 		if (s1 != null){
 			FontMetrics fontMetrics = g2d.getFontMetrics();

@@ -50,6 +50,7 @@ class Text extends TextNode {
 		super(w, h);
 		// TODO Auto-generated constructor stub
 	}
+
 }
 
 

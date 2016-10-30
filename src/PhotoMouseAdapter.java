@@ -42,7 +42,7 @@ public class PhotoMouseAdapter extends MouseAdapter{
 		photoComponent.requestFocus();
 		// TODO mouse pressed
 		photoBrowser.setStatusMes("mouse pressed position: ["+m.getX()+","+m.getY()+"]");
-System.out.println("mouseClicked(45)");
+		System.out.println("mouseClicked(45)");
 		if(photoComponent.flipped){
 			photoComponent.createNewStroke();
 
@@ -59,13 +59,13 @@ System.out.println("mouseClicked(45)");
 			}
 
 			photoComponent.updateStrokeParameters();
-			System.out.println("stroke color "+photoComponent.stroke.boundsColor);
+			//			System.out.println("stroke color "+photoComponent.stroke.boundsColor);
 			photoComponent.strokeList.add(photoComponent.stroke);
 			System.out.println("mouseClicked(64)");
-//			System.out.println("MouseAdap "+photoComponent.strokeList.size()+" color "+photoComponent.strokeList.get(photoComponent.strokeList.size()-1).boundsColor);
-			
+			//			System.out.println("MouseAdap "+photoComponent.strokeList.size()+" color "+photoComponent.strokeList.get(photoComponent.strokeList.size()-1).boundsColor);
 
-//			System.out.println("position "+photoComponent.stroke.initPosition +" "+photoComponent.stroke.finalPosition);photoComponent.repaint();
+
+			//			System.out.println("position "+photoComponent.stroke.initPosition +" "+photoComponent.stroke.finalPosition);photoComponent.repaint();
 			photoComponent.index++;	
 
 		}
@@ -90,7 +90,7 @@ System.out.println("mouseClicked(45)");
 			}else {
 				photoComponent.stroke.finalPosition.x = m.getX();
 				photoComponent.stroke.finalPosition.y = m.getY();
-				System.out.println("position "+photoComponent.stroke.initPosition +" "+photoComponent.stroke.finalPosition);
+				//				System.out.println("position "+photoComponent.stroke.initPosition +" "+photoComponent.stroke.finalPosition);
 
 			}
 
