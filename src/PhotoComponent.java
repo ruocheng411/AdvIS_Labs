@@ -6,6 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Shape;
+import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -18,6 +20,10 @@ import javax.swing.JColorChooser;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
+import node.Node;
+import node.PathNode;
+import node.RootNode;
+
 
 public class PhotoComponent extends JComponent {
 	BufferedImage image = null;
@@ -27,30 +33,31 @@ public class PhotoComponent extends JComponent {
 	int offsety;
 	Image background;
 	int photoIndexCurrent;
+	//	String tipText[] = { "Line", "Rect",  "Circle", "Oval", 
+	//			"Roundrect", "Pencil","Erase","Text","Color", "Thinck" };
 	ArrayList<Photo> photoList = new ArrayList<Photo>();;
 	Boolean flipped = false;
 	public File backgroundPath = FileSystems.getDefault().getPath("image", "background.jpg").toFile();
 	PhotoBrowser photoBrowser = null;
 
 	ArrayList<Node> strokeList = new ArrayList<Node>();
-//	ArrayList<Drawing> strokeList = new ArrayList<Drawing>();
-//	Drawing stroke;
 	Node stroke;
 	int currentChoice;
 	int index;
 	Color colorDefault = Color.black;
-	Color color;
-	int R,G,B;
-	float thickness = 1.0f;
-	
+	Color boundsColor = new Color(0, 0, 0);
+	Color filledColor = null;
+	double thickness = 1.0f;
+	boolean Filled = false;
+
 	int textPosition;
 
 	RootNode rootNode;
-	
+
 	public PhotoComponent(RootNode rNode){
 		rootNode = rNode;
 	}
-	
+
 	public PhotoComponent(PhotoBrowser pb) {
 		// TODO Auto-generated constructor stub
 		photoBrowser = pb;
@@ -127,11 +134,12 @@ public class PhotoComponent extends JComponent {
 		// TODO Auto-generated method stub
 		if (photoIndexCurrent>-1) {
 			if(photoIndexCurrent<=photoList.size()-1){
+				strokeList.clear();
 				photoList.remove(photoIndexCurrent);
 				photoBrowser.setStatusMes(" photo "+photoIndexCurrent+" has been deleted");
 				photoIndexCurrent --;
-				if(photoIndexCurrent>=0){
-					photoList.get(photoIndexCurrent).loadPhoto();
+				if(photoIndexCurrent>=0){;
+				photoList.get(photoIndexCurrent).loadPhoto();
 				}
 				init();
 			}else {
@@ -151,6 +159,7 @@ public class PhotoComponent extends JComponent {
 		}
 		photoIndexCurrent = photoList.size()-1;
 		loadPhoto(photoIndexCurrent);
+		flipped = false;
 		init();
 		photoBrowser.setStatusMes(photoList.size()+" photo(s) has been opened");
 	}
@@ -208,101 +217,106 @@ public class PhotoComponent extends JComponent {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);		
 
 		int j = 0;
-		while (j < index) {
-			strokeList.get(j).paint(g2d);
+		while (j < strokeList.size()) {
+			strokeList.get(j).paintNode(g2d);
+//			System.out.println("photoComponent "+strokeList.get(j).boundsColor+thickness);
 			j++;
-
 		}
 
 		graphics.drawImage(photoList.get(photoIndexCurrent).imgBack, x, y, null); 
 
 	}
 
-//	public void draw(Graphics2D g2d, Drawing i) {
-//		i.draw(g2d);
-//	}
-//	
+	//	public void draw(Graphics2D g2d, Drawing i) {
+	//		i.draw(g2d);
+	//	}
+	//	
 
-	public void setDrawChoice(int i){
+	public void setDrawCursor(int i){
 		currentChoice = i;
 		if ((i>=0)&&(i<6)) {
-//			createNewDraw();
 			setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));// mouse change to cross
 
 		}else if (i==7) {
-//			createNewText();
 			setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));	
 		}else {
 			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		}
 	}
 
-	//BasicStroke
-
-
 
 	public void chooseColor() {
-		setDrawChoice(8);
-		color = JColorChooser.showDialog(photoBrowser, "Color", colorDefault);
-		System.out.println(R+G+B);
+		//		setDrawCursor(8);
+		Color c = JColorChooser.showDialog(photoBrowser, "Border Color", colorDefault);
 		try {
-			R = color.getRed();
-			G = color.getGreen();
-			B = color.getBlue();
-			System.out.println(R+","+G+","+B);
+			boundsColor = c;
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			R = 0;
-			G = 0;
-			B = 0;
+			boundsColor = new Color(0, 0, 0);
+		}
+	}
+	
+	public void chooseFillColor() {
+		//		setDrawCursor(8);
+		Color c = JColorChooser.showDialog(photoBrowser, "Fill Color", colorDefault);
+		try {
+			filledColor = c;
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			filledColor = null;
+			Filled = false;
 		}
 	}
 
 	public void setThickness() {
-		currentChoice = 9;
+		//		currentChoice = 9;
 		String input;
 		input = JOptionPane.showInputDialog("Please set the thickness of pen (>0)");
 		try {
-			thickness = Float.parseFloat(input);
+			thickness = Double.parseDouble(input);
 		} catch (Exception e) {
 			// TODO: handle exception
 			thickness = 1.0f;
 			System.out.println(e);
 		}
-			stroke.thickness =thickness;
-		
+		stroke.thickness =thickness;
+
 	}
 
-	
-	
-	public void createNewDraw() {
+
+	public void createNewStroke() {
 
 		if (flipped) {
 			setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));// mouse change to cross
 			switch (currentChoice) {
 			case 0:
-				stroke = new Line();
+				stroke = new LineNode();
+
 				break;
 			case 1:
-				stroke = new Rect();
+				stroke = new RectNode();
 				break;
-//			case 2:
-//				stroke = new Circle();
-//				break;
-//			case 3:
-//				stroke = new Oval();
-//				break;
-//			case 4:
-//				stroke = new RoundRect();
-//				break;
+			case 2:
+				stroke = new CircleNode();
+				break;
+			case 3:
+				stroke = new OvalNode();
+				break;
+			case 4:
+				stroke = new RoundRectNode();
+				break;
 			case 5:
-				stroke = new Pencil();
-				stroke.path2d = new Path2D.Float();
+				//				stroke = new Pencil();
+				stroke = new PathNode();
+				stroke.path2d = new Path2D.Double();
+				stroke.setBoundsColor(new Color(0, 0, 0));
 				break;
 			case 6:
-				stroke = new Erase();
-				stroke.boundsColor = new Color(255, 255, 255);
+				stroke = new PathNode();
+				stroke.path2d = new Path2D.Double();
+				stroke.setBoundsColor(new Color(255, 255, 255));
 				break;
 			case 7:
 				setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));	
@@ -310,19 +324,25 @@ public class PhotoComponent extends JComponent {
 			default:
 				break;
 			}
+			if(Filled){
+				stroke.fillInside = true;
+			}
 			repaint();
 		}
 	}
 
 
-	
+
 	public void updateStrokeParameters() {
-		stroke.boundsColor = new Color(R, G, B);
-//		stroke.type = currentChoice;
-		
+		stroke.boundsColor = boundsColor;
+		//		//		stroke.type = currentChoice;
+		//\
+		if(Filled){
+			stroke.filledColor = filledColor;
+		}
 		stroke.thickness = thickness;
 		repaint();
-		
-	}
-
+	}		
 }
+
+

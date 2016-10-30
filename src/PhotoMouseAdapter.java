@@ -10,7 +10,7 @@ public class PhotoMouseAdapter extends MouseAdapter{
 		photoComponent = pc;
 		photoBrowser = pb;
 	}
-	
+
 	@Override
 	public void mouseClicked(MouseEvent e){
 		super.mouseClicked(e);
@@ -25,7 +25,7 @@ public class PhotoMouseAdapter extends MouseAdapter{
 			}
 		}
 	}
-	
+
 	@Override
 	public void mouseEntered(MouseEvent m) {
 		// TODO mouse in
@@ -42,23 +42,30 @@ public class PhotoMouseAdapter extends MouseAdapter{
 		photoComponent.requestFocus();
 		// TODO mouse pressed
 		photoBrowser.setStatusMes("mouse pressed position: ["+m.getX()+","+m.getY()+"]");
-		
+System.out.println("mouseClicked(45)");
 		if(photoComponent.flipped){
-			photoComponent.createNewDraw();
+			photoComponent.createNewStroke();
 
 			photoComponent.stroke.initPosition.x = m.getX();
 			photoComponent.stroke.finalPosition.x = m.getX();
 			photoComponent.stroke.initPosition.y = m.getY();
 			photoComponent.stroke.finalPosition.y = m.getY();
-			
+			System.out.println("mouseClicked(53)");
+
+
 			if (photoComponent.currentChoice == 5 || photoComponent.currentChoice == 6) {
 				photoComponent.stroke.path2d.moveTo(m.getX(), m.getY());
+				System.out.println("mouseClicked(58)");
 			}
 
 			photoComponent.updateStrokeParameters();
-			
+			System.out.println("stroke color "+photoComponent.stroke.boundsColor);
 			photoComponent.strokeList.add(photoComponent.stroke);
-			photoComponent.repaint();
+			System.out.println("mouseClicked(64)");
+//			System.out.println("MouseAdap "+photoComponent.strokeList.size()+" color "+photoComponent.strokeList.get(photoComponent.strokeList.size()-1).boundsColor);
+			
+
+//			System.out.println("position "+photoComponent.stroke.initPosition +" "+photoComponent.stroke.finalPosition);photoComponent.repaint();
 			photoComponent.index++;	
 
 		}
@@ -79,10 +86,11 @@ public class PhotoMouseAdapter extends MouseAdapter{
 		if(photoComponent.flipped){
 			if (photoComponent.currentChoice == 5 || photoComponent.currentChoice == 6) {
 				photoComponent.stroke.path2d.lineTo(m.getX(), m.getY());
-				
+
 			}else {
 				photoComponent.stroke.finalPosition.x = m.getX();
 				photoComponent.stroke.finalPosition.y = m.getY();
+				System.out.println("position "+photoComponent.stroke.initPosition +" "+photoComponent.stroke.finalPosition);
 
 			}
 

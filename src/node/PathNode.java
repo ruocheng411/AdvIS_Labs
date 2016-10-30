@@ -1,3 +1,4 @@
+package node;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -10,21 +11,18 @@ import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
+import javax.sound.midi.VoiceStatus;
+
 import org.omg.CORBA.Bounds;
 
 public class PathNode extends Node {
-
-//	public PathNode() {
-//		// TODO Auto-generated constructor stub
-//		
-//	}
+	
 
 	@Override
 	public void paintNode (Graphics2D g2d) {
 		g2d.setPaint(boundsColor);
-		g2d.setStroke(new BasicStroke(thickness, BasicStroke.CAP_ROUND,
+		g2d.setStroke(new BasicStroke((float) thickness, BasicStroke.CAP_ROUND,
 				BasicStroke.JOIN_BEVEL));
-		g2d.draw(path2d);
 
 		RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
@@ -33,13 +31,26 @@ public class PathNode extends Node {
 				RenderingHints.VALUE_RENDER_QUALITY);
 
 		g2d.setRenderingHints(rh);
+		g2d.draw(path2d);
 
 	}
 
 	@Override
-	public Rectangle getBounds(){
-		return getBounds();
+	public Rectangle getNodeBounds(){
+		return getNodeBounds();
 	}
+	@Override
+	public void setBoundsColor(Color c){
+		boundsColor = c;
+	}
+
+	@Override
+	public Rectangle getBounds() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 
 }

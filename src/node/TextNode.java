@@ -1,8 +1,10 @@
+package node;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.Shape;
 
 public class TextNode extends Node {
 
@@ -10,12 +12,15 @@ public class TextNode extends Node {
 	private Font font;
 	protected int width;
 	protected int height;
+	public Color boundColor;
+	public double thickness;
 	
 	public TextNode(int w, int h) {
 		// TODO Auto-generated constructor stub
 		s1 = "";
 		width = w;
 		height = h;
+		System.out.println("TextNode line 19");
 	}
 
 	public TextNode(String t,int w, int h){
@@ -142,4 +147,12 @@ public class TextNode extends Node {
 
 		}
 	}
+
+	@Override
+	public Rectangle getBounds() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }

@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import node.RootNode;
+
 public class Photo {
 	public File filePath;
 	public BufferedImage img;

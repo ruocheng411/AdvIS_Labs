@@ -52,11 +52,11 @@ public class PhotoBrowser extends JFrame{
 	PhotoComponent photoComponent = new PhotoComponent(this);
 	JToolBar imageToolBar = new JToolBar();
 	String imageTools[] = { "line", "rect",  "circle", "oval", 
-			"roundrect", "pen","erase","text","color", "stroke" };
+			"roundrect", "pen","erase","text","color", "stroke","fillColor" };
 	String tipText[] = { "Line", "Rect",  "Circle", "Oval", 
-			"Roundrect", "Pen","Erase","Text","Color", "Thinck" };
+			"Roundrect", "Pen","Erase","Text","Border Color", "Thinck","Fill Color" };
 	JToggleButton[] imageButtons;
-	int[] toolIndex = {1,2,3,4,5,6,7,8,9};
+	int[] toolIndex = {1,2,3,4,5,6,7,8,9,10};
 	ButtonGroup group = new ButtonGroup();
 	
 	
@@ -297,28 +297,28 @@ public class PhotoBrowser extends JFrame{
 			
 			switch (i) {
 			case 0:
-				imageButtons[0].addActionListener(Event->{photoComponent.setDrawChoice(0);setStatusMes(tipText[0]);});
+				imageButtons[0].addActionListener(Event->{photoComponent.setDrawCursor(0);setStatusMes(tipText[0]);});
 				break;
 			case 1:
-				imageButtons[1].addActionListener(Event->{photoComponent.setDrawChoice(1);setStatusMes(tipText[1]);});
+				imageButtons[1].addActionListener(Event->{photoComponent.setDrawCursor(1);setStatusMes(tipText[1]);});
 				break;
 			case 2:
-				imageButtons[2].addActionListener(Event->{photoComponent.setDrawChoice(2);setStatusMes(tipText[2]);});
+				imageButtons[2].addActionListener(Event->{photoComponent.setDrawCursor(2);setStatusMes(tipText[2]);});
 				break;
 			case 3:
-				imageButtons[3].addActionListener(Event->{photoComponent.setDrawChoice(3);setStatusMes(tipText[3]);});
+				imageButtons[3].addActionListener(Event->{photoComponent.setDrawCursor(3);setStatusMes(tipText[3]);});
 				break;
 			case 4:
-				imageButtons[4].addActionListener(Event->{photoComponent.setDrawChoice(4);setStatusMes(tipText[4]);});
+				imageButtons[4].addActionListener(Event->{photoComponent.setDrawCursor(4);setStatusMes(tipText[4]);});
 				break;
 			case 5:
-				imageButtons[5].addActionListener(Event->{photoComponent.setDrawChoice(5);setStatusMes(tipText[5]);});
+				imageButtons[5].addActionListener(Event->{photoComponent.setDrawCursor(5);setStatusMes(tipText[5]);});
 				break;
 			case 6:
-				imageButtons[6].addActionListener(Event->{photoComponent.setDrawChoice(6);setStatusMes(tipText[6]);});
+				imageButtons[6].addActionListener(Event->{photoComponent.setDrawCursor(6);setStatusMes(tipText[6]);});
 				break;
 			case 7:
-				imageButtons[7].addActionListener(Event->{photoComponent.setDrawChoice(7);setStatusMes(tipText[7]);});
+				imageButtons[7].addActionListener(Event->{photoComponent.setDrawCursor(7);setStatusMes(tipText[7]);});
 				break;
 			case 8:
 				imageButtons[8].addActionListener(Event->{
@@ -326,6 +326,10 @@ public class PhotoBrowser extends JFrame{
 				break;
 			case 9:
 				imageButtons[9].addActionListener(Event->{photoComponent.setThickness();setStatusMes(tipText[9]);});
+				break;
+			case 10:
+				imageButtons[10].addActionListener(Event->{
+					photoComponent.Filled = true;photoComponent.chooseFillColor();setStatusMes(tipText[10]);});
 				break;
 			default:
 				break;

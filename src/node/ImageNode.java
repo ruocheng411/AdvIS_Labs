@@ -1,6 +1,8 @@
+package node;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Shape;
 
 public class ImageNode extends Node {
 	public Image image;
@@ -18,9 +20,15 @@ public class ImageNode extends Node {
 	}
 	
 	@Override
-	public Rectangle getBounds(){
+	public Rectangle getNodeBounds(){
 		return new Rectangle(0,0,image.getWidth(null),image.getHeight(null));
 	}
+	@Override
+	public Rectangle getBounds() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 
 
