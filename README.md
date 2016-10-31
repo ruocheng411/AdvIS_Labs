@@ -54,6 +54,17 @@ Color / stroke width / text size in the control bar. Influence next created elem
 . Node
 All the paintings are done using scene-graph nodes.
 
+Enable to:
+reference to parent;
+list of children;
+adding / removing children
+Cascading paint (paint node and paint children);
+Graphical context  (fill and stroke colors/transformation)
+Bounds getter
+Specific nodes
+Container
+Graphic nodes(Text, Straight Line, Rectangle, Round Rectangle, Circle, Eclipse, Polygon, Pencil, Erase)
+
 
 
 

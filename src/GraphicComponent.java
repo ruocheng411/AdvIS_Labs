@@ -145,7 +145,7 @@ class CircleNode extends ShapeNode {
 	}
 }
 /***
- * eclipe node
+ * eclipse node
  */
 class OvalNode extends ShapeNode {
 	@Override
