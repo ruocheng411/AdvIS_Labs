@@ -3,7 +3,11 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Shape;
-
+/***
+ * image node
+ * @author zhuyali
+ * drawimage
+ */
 public class ImageNode extends Node {
 	public Image image;
 	public ImageNode() {

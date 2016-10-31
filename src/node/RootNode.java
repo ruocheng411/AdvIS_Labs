@@ -4,7 +4,11 @@ import java.awt.Rectangle;
 import java.awt.Shape;
 
 import org.omg.CORBA.Bounds;
-
+/***
+ * root node
+ * @author zhuyali
+ *
+ */
 public class RootNode extends Node {
 	Bounds bounds;
 

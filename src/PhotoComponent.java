@@ -23,8 +23,14 @@ import javax.swing.JOptionPane;
 import node.Node;
 import node.PathNode;
 import node.RootNode;
-
-
+/***
+ * 
+ * @author zhuyali
+ * Extends JComponent
+ * open several photos but show an photo at one time
+ * show the photo and its back
+ * accept drawing and typing
+ */
 public class PhotoComponent extends JComponent {
 	BufferedImage image = null;
 	int parentSizex;
@@ -33,8 +39,6 @@ public class PhotoComponent extends JComponent {
 	int offsety;
 	Image background;
 	int photoIndexCurrent;
-	//	String tipText[] = { "Line", "Rect",  "Circle", "Oval", 
-	//			"Roundrect", "Pencil","Erase","Text","Color", "Thinck" };
 	ArrayList<Photo> photoList = new ArrayList<Photo>();;
 	Boolean flipped = false;
 	public File backgroundPath = FileSystems.getDefault().getPath("image", "background.jpg").toFile();
@@ -81,7 +85,9 @@ public class PhotoComponent extends JComponent {
 		revalidate();
 		repaint();
 	}
-
+	/***
+	 * initial the Component
+	 */
 	public void init() {
 		System.out.println("Parent size = "+parentSizex+"  "+parentSizey);
 		offsetx = 0;
@@ -129,7 +135,9 @@ public class PhotoComponent extends JComponent {
 		}
 		setPreferredSize(new Dimension(w, h));
 	}
-
+	/***
+	 * delete a Photo
+	 */
 	public void deletePhoto() {
 		// TODO Auto-generated method stub
 		if (photoIndexCurrent>-1) {
@@ -174,7 +182,11 @@ public class PhotoComponent extends JComponent {
 		}
 
 	}
-
+	/***
+	 * paint component and background
+	 * when flipped paint photo's back
+	 * else paint the photo
+	 */
 	@Override  
 	public void paintComponent(Graphics graphics) { 
 		super.paintComponent(graphics);
@@ -225,7 +237,11 @@ public class PhotoComponent extends JComponent {
 		graphics.drawImage(photoList.get(photoIndexCurrent).imgBack, x, y, null); 
 
 	}
-
+	/***
+	 * 
+	 * @param i the tool has been chosen
+	 * set Cursor
+	 */
 	public void setDrawCursor(int i){
 		currentChoice = i;
 		if ((i>=0)&&(i<6)) {
@@ -238,7 +254,10 @@ public class PhotoComponent extends JComponent {
 		}
 	}
 
-
+	/***
+	 * Choose bounds and text's color from the tool of JColorChooser
+	 * if exception, use the black color
+	 */
 	public void chooseColor() {
 		//		setDrawCursor(8);
 		Color c = JColorChooser.showDialog(photoBrowser, "Border Color", colorDefault);
@@ -250,7 +269,10 @@ public class PhotoComponent extends JComponent {
 			boundsColor = new Color(0, 0, 0);
 		}
 	}
-
+	/***
+	 * Choose filled color from the tool of JColorChooser
+	 * if exception, use the black color
+	 */
 	public void chooseFillColor() {
 		//		setDrawCursor(8);
 		Color c = JColorChooser.showDialog(photoBrowser, "Fill Color", colorDefault);
@@ -280,7 +302,7 @@ public class PhotoComponent extends JComponent {
 
 
 	public boolean createNewStroke() {
-		
+
 		if (flipped) {
 			setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));// mouse change to cross
 			switch (currentChoice) {
@@ -301,7 +323,6 @@ public class PhotoComponent extends JComponent {
 				stroke = new RoundRectNode();
 				break;
 			case 5:
-				//				stroke = new Pencil();
 				stroke = new PathNode();
 				stroke.path2d = new Path2D.Double();
 				stroke.setBoundsColor(new Color(0, 0, 0));
@@ -322,13 +343,15 @@ public class PhotoComponent extends JComponent {
 				stroke.fillInside = true;
 			}
 			repaint();
-			
+
 		}
 		return true;
 	}
 
 
-
+	/***
+	 * update the stroke's context
+	 */
 	public void updateStrokeParameters() {
 		if(currentChoice == 6){
 			boundsColor = new Color(255, 255, 255);

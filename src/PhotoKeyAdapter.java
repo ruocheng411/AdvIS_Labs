@@ -1,7 +1,11 @@
 import java.awt.FontMetrics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
+/***
+ * all the actions with keyboard
+ * @author zhuyali
+ *
+ */
 public class PhotoKeyAdapter extends KeyAdapter {
 	PhotoComponent photoComponent = null;
 	PhotoBrowser photoBrowser = null;

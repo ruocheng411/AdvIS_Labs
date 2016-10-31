@@ -6,7 +6,11 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
-
+/***
+ * shape node
+ * @author zhuyali
+ * all the special shape node's base
+ */
 public class ShapeNode extends Node {
 
 	Shape shape;

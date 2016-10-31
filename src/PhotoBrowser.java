@@ -25,7 +25,12 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
+/***
+ * 
+ * @author zhuyali
+ * Creates a PhotoBrowser who extends JFrame to be the main function
+ * Adds the menu and tools
+ */
 public class PhotoBrowser extends JFrame{
 	JMenuBar menuBar = new JMenuBar();  
 	JMenu fileMenu = new JMenu("File");  

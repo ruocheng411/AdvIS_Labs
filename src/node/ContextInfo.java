@@ -6,7 +6,11 @@ import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
-
+/***
+ * save the contxet infotmation of node
+ * @author zhuyali
+ *
+ */
 public class ContextInfo {
 	private AffineTransform transform;
 	private double rotation;

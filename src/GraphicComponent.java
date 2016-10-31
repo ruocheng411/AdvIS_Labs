@@ -35,7 +35,9 @@ public class GraphicComponent extends JComponent {
 	}
 
 }
-
+/***
+ * pencil node
+ */
 class PencilNode extends PathNode {
 
 	public PencilNode() {
@@ -46,14 +48,18 @@ class PencilNode extends PathNode {
 
 
 }
-
+/***
+ * erase node
+ */
 class EraseNode extends PathNode {
 	public EraseNode() {
 		// TODO Auto-generated constructor stub
 		path2d = new Path2D.Float();
 	}
 }
-
+/***
+ * text node
+ */
 class Text extends TextNode {
 
 	public Text(int w, int h) {
@@ -63,7 +69,9 @@ class Text extends TextNode {
 
 }
 
-
+/***
+ * straight line node
+ */
 class LineNode extends ShapeNode { 
 
 	@Override
@@ -79,7 +87,9 @@ class LineNode extends ShapeNode {
 		return new Line2D.Double(initPosition.x, initPosition.y, finalPosition.x, finalPosition.y);
 	}
 }
-
+/***
+ * rectangle note
+ */
 class RectNode extends ShapeNode { 
 	@Override
 	public void paintNode(Graphics2D g2d){
@@ -103,7 +113,9 @@ class RectNode extends ShapeNode {
 		return new Ellipse2D.Double(x, y, w, h);
 	}
 }
-
+/**
+ * circle node
+ */
 class CircleNode extends ShapeNode {
 	@Override
 	public void paintNode(Graphics2D g2d) {
@@ -132,7 +144,9 @@ class CircleNode extends ShapeNode {
 		return new Ellipse2D.Double(x, y, Math.max(w, h),Math.max(w, h));
 	}
 }
-
+/***
+ * eclipe node
+ */
 class OvalNode extends ShapeNode {
 	@Override
 	public void paintNode(Graphics2D g2d) {
@@ -160,7 +174,9 @@ class OvalNode extends ShapeNode {
 		return new Ellipse2D.Double(x, y, w, h);
 	}
 }
-
+/***
+ * round rectangle node
+ */
 class RoundRectNode extends ShapeNode{
 	public int cornerRadius = 30;
 	
@@ -189,13 +205,27 @@ class RoundRectNode extends ShapeNode{
 		return new RoundRectangle2D.Double(x, y, w, h, cornerRadius, cornerRadius);
 	}	
 }
-
+/***
+ * polygonNode
+ */
 class PolygonNode extends ShapeNode {
 	public ArrayList<Point> corners;
 	public PolygonNode(ArrayList<Point> cornersList){
 		corners = cornersList;
 	}
-	
+	@Override
+	public void paintNode(Graphics2D g2d) {
+		g2d.setPaint(boundsColor);
+		g2d.setStroke(new BasicStroke((float) thickness));
+		int x1 = initPosition.x;
+		int y1 = initPosition.y;
+		int x2 = finalPosition.x;
+		int y2 = finalPosition.y;
+		g2d.drawPolygon((Polygon) this.getShape());
+		if(fillInside){
+			g2d.setPaint(filledColor);
+			g2d.drawPolygon((Polygon) this.getShape());}
+	}
 	@Override
 	public Shape getShape(){
 		Polygon polygon = new Polygon();

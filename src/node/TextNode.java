@@ -5,7 +5,14 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Shape;
-
+/***
+ * Text Node
+ * @author zhuyali
+ *	enters typed text on the back of the photo
+ * implement word wrap
+ * Backspacing over already entered characters
+ * delete characters when typing
+ */
 public class TextNode extends Node {
 
 //	private Rectangle bounds;

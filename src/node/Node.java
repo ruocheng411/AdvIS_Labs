@@ -18,18 +18,22 @@ import javax.naming.spi.DirStateFactory.Result;
 
 import org.omg.CORBA.Bounds;
 import org.w3c.dom.css.Rect;
-
-
-//注释
+/***
+ * Node
+ * @author zhuyali
+ * Represents the base of scene-graph nodes.
+ * Abstract class
+ */
 
 public abstract class Node {
+
 	protected Node parent;
 	protected ArrayList<Node> children;
 	private AffineTransform transform;
 	private double rotation = 0;
 	private double scaleX = 1,scaleY = 1;
 	private ContextInfo context;
-	
+
 	public Point initPosition;
 	public Point finalPosition;	
 	public boolean visible = true;
@@ -45,7 +49,6 @@ public abstract class Node {
 	public boolean fillInside = false;
 
 
-
 	public Node() {
 		// TODO Auto-generated constructor stub
 		initPosition = new Point();
@@ -56,20 +59,27 @@ public abstract class Node {
 	}
 
 	/**
-	 * 
-	 * @param b
+	 * set visibility
+	 * @param b 
 	 */
 	public void setVisible(boolean b) {
 		visible = b;
 	}
-	//	paint node and paint children
+	/***
+	 * paint node and paint children
+	 * @param graphics2d
+	 */	
 	public void paint(Graphics2D graphics2d) {
 		paintNode(graphics2d);
 		for(int i=0; i<children.size();i++){
 			children.get(i).paint(graphics2d);
 		}
 	}
-
+	/***
+	 * To be override
+	 * paint itself
+	 * @param graphics2d
+	 */
 	public abstract void paintNode(Graphics2D graphics2d);
 
 
@@ -128,7 +138,12 @@ public abstract class Node {
 		return rect;
 	}
 
-
+	/***
+	 * 
+	 * @param bounds rectangle source
+	 * @param transform transform matrix type of AffineTransform
+	 * @return
+	 */
 	public Rectangle transformBounds(Rectangle bounds, AffineTransform transform){
 		ArrayList<Point>list = new ArrayList<>(4);
 
@@ -215,7 +230,7 @@ public abstract class Node {
 		context.s1 = s1;
 		context.s2 = s2;
 	}
-	
+
 	public ContextInfo getContext() {
 		return context;
 	}

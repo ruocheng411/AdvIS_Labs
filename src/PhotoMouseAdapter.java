@@ -1,7 +1,11 @@
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
+/***
+ * all the actions with mouse
+ * @author zhuyali
+ * draw, text, click, pressed, drage, realse
+ */
 public class PhotoMouseAdapter extends MouseAdapter{
 	PhotoComponent photoComponent = null;
 	PhotoBrowser photoBrowser = null;

@@ -14,7 +14,11 @@ import java.util.ArrayList;
 import javax.sound.midi.VoiceStatus;
 
 import org.omg.CORBA.Bounds;
-
+/***
+ * path node
+ * @author zhuyali
+ * paint path2d
+ */
 public class PathNode extends Node {
 	
 
