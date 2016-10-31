@@ -44,29 +44,32 @@ public class PhotoMouseAdapter extends MouseAdapter{
 		photoBrowser.setStatusMes("mouse pressed position: ["+m.getX()+","+m.getY()+"]");
 		System.out.println("mouseClicked(45)");
 		if(photoComponent.flipped){
-			photoComponent.createNewStroke();
+			boolean isCreated;
+			isCreated = photoComponent.createNewStroke();
+			
+			if(isCreated){
+				photoComponent.updateStrokeParameters();
+				photoComponent.stroke.initPosition.x = m.getX();
+				photoComponent.stroke.finalPosition.x = m.getX();
+				photoComponent.stroke.initPosition.y = m.getY();
+				photoComponent.stroke.finalPosition.y = m.getY();
+				System.out.println("mouseClicked(53)");
 
-			photoComponent.stroke.initPosition.x = m.getX();
-			photoComponent.stroke.finalPosition.x = m.getX();
-			photoComponent.stroke.initPosition.y = m.getY();
-			photoComponent.stroke.finalPosition.y = m.getY();
-			System.out.println("mouseClicked(53)");
+
+				if (photoComponent.currentChoice == 5 || photoComponent.currentChoice == 6) {
+					photoComponent.stroke.path2d.moveTo(m.getX(), m.getY());
+					System.out.println("mouseClicked(58)");
+				}
+
+				//			System.out.println("stroke color "+photoComponent.stroke.boundsColor);
+				photoComponent.strokeList.add(photoComponent.stroke);
+				System.out.println("mouseClicked(64)");
+				//			System.out.println("MouseAdap "+photoComponent.strokeList.size()+" color "+photoComponent.strokeList.get(photoComponent.strokeList.size()-1).boundsColor);
 
 
-			if (photoComponent.currentChoice == 5 || photoComponent.currentChoice == 6) {
-				photoComponent.stroke.path2d.moveTo(m.getX(), m.getY());
-				System.out.println("mouseClicked(58)");
+				//			System.out.println("position "+photoComponent.stroke.initPosition +" "+photoComponent.stroke.finalPosition);photoComponent.repaint();
+				photoComponent.index++;	
 			}
-
-			photoComponent.updateStrokeParameters();
-			//			System.out.println("stroke color "+photoComponent.stroke.boundsColor);
-			photoComponent.strokeList.add(photoComponent.stroke);
-			System.out.println("mouseClicked(64)");
-			//			System.out.println("MouseAdap "+photoComponent.strokeList.size()+" color "+photoComponent.strokeList.get(photoComponent.strokeList.size()-1).boundsColor);
-
-
-			//			System.out.println("position "+photoComponent.stroke.initPosition +" "+photoComponent.stroke.finalPosition);photoComponent.repaint();
-			photoComponent.index++;	
 
 		}
 
@@ -76,6 +79,7 @@ public class PhotoMouseAdapter extends MouseAdapter{
 	public void mouseReleased(MouseEvent m) {
 		// TODO mouse released
 		photoBrowser.setStatusMes("mouse released position ["+m.getX()+","+m.getX()+"]");
+//		 photoComponent.currentChoice = -1;
 
 	}
 
@@ -101,7 +105,7 @@ public class PhotoMouseAdapter extends MouseAdapter{
 
 	public void mouseMoved(MouseEvent m)// mouse move
 	{
-		photoBrowser.setStatusMes("mouse position£∫[" + m.getX() + " ," + m.getY() + "]");
+		photoBrowser.setStatusMes("mouse position[" + m.getX() + " ," + m.getY() + "]");
 	}
 
 

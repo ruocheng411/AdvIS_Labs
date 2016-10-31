@@ -219,18 +219,12 @@ public class PhotoComponent extends JComponent {
 		int j = 0;
 		while (j < strokeList.size()) {
 			strokeList.get(j).paintNode(g2d);
-//			System.out.println("photoComponent "+strokeList.get(j).boundsColor+thickness);
 			j++;
 		}
 
 		graphics.drawImage(photoList.get(photoIndexCurrent).imgBack, x, y, null); 
 
 	}
-
-	//	public void draw(Graphics2D g2d, Drawing i) {
-	//		i.draw(g2d);
-	//	}
-	//	
 
 	public void setDrawCursor(int i){
 		currentChoice = i;
@@ -256,7 +250,7 @@ public class PhotoComponent extends JComponent {
 			boundsColor = new Color(0, 0, 0);
 		}
 	}
-	
+
 	public void chooseFillColor() {
 		//		setDrawCursor(8);
 		Color c = JColorChooser.showDialog(photoBrowser, "Fill Color", colorDefault);
@@ -271,7 +265,7 @@ public class PhotoComponent extends JComponent {
 	}
 
 	public void setThickness() {
-		//		currentChoice = 9;
+		currentChoice = 9;
 		String input;
 		input = JOptionPane.showInputDialog("Please set the thickness of pen (>0)");
 		try {
@@ -281,13 +275,12 @@ public class PhotoComponent extends JComponent {
 			thickness = 1.0f;
 			System.out.println(e);
 		}
-		stroke.thickness =thickness;
 
 	}
 
 
-	public void createNewStroke() {
-
+	public boolean createNewStroke() {
+		
 		if (flipped) {
 			setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));// mouse change to cross
 			switch (currentChoice) {
@@ -321,27 +314,31 @@ public class PhotoComponent extends JComponent {
 			case 7:
 				setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));	
 				stroke = new Text(photoList.get(photoIndexCurrent).imgBack.getWidth(),photoList.get(photoIndexCurrent).imgBack.getHeight());
-			default:
 				break;
+			default:
+				return false;
 			}
 			if(Filled){
 				stroke.fillInside = true;
 			}
 			repaint();
+			
 		}
+		return true;
 	}
 
 
 
 	public void updateStrokeParameters() {
-		stroke.boundsColor = boundsColor;
-		//		//		stroke.type = currentChoice;
-		//\
+		if(currentChoice == 6){
+			boundsColor = new Color(255, 255, 255);
+		}else{
+			stroke.boundsColor = boundsColor;
+		}
 		if(Filled){
 			stroke.filledColor = filledColor;
 		}
 		stroke.thickness = thickness;
-		repaint();
 	}		
 }
 

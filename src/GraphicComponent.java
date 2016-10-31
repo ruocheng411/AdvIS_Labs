@@ -18,11 +18,21 @@ import java.util.ArrayList;
 
 import javax.swing.JComponent;
 
+import node.Node;
 import node.PathNode;
 import node.ShapeNode;
 import node.TextNode;
 
-public class GraphicComponent {
+public class GraphicComponent extends JComponent {
+	private boolean showBounds = false;
+	public Node graphicalNode;
+	public GraphicComponent() {
+	
+	}
+	public void useNodeSize() {
+		Rectangle bounds = graphicalNode.getBounds();
+		setPreferredSize(new Dimension(bounds.width, bounds.height));
+	}
 
 }
 

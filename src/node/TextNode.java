@@ -17,7 +17,7 @@ public class TextNode extends Node {
 	
 	public TextNode(int w, int h) {
 		// TODO Auto-generated constructor stub
-		s1 = "";
+//		s1 = "";
 		width = w;
 		height = h;
 		System.out.println("TextNode line 19");
@@ -58,7 +58,7 @@ public class TextNode extends Node {
 			FontMetrics fontMetrics = g2d.getFontMetrics();
 			int stringH = fontMetrics.getHeight();
 			int stringW = fontMetrics.stringWidth(s1);
-			System.out.println(x1 + stringW);
+//			System.out.println(x1 + stringW);
 			//			System.out.println(width);
 
 			int space = width-x1-5;
@@ -75,7 +75,7 @@ public class TextNode extends Node {
 							String sPrint = string.substring(0, i+1);
 							g2d.drawString(sPrint, x1, y1+stringH*index);
 							string = string.substring(i+1, string.length());
-							System.out.println("press return");
+//							System.out.println("press return");
 							index++;
 							break;
 						}
@@ -83,7 +83,7 @@ public class TextNode extends Node {
 					}
 					if(!hasTab){
 						g2d.drawString(string, x1, y1+stringH*index);
-						System.out.println("did not have return");
+//						System.out.println("did not have return");
 						break;
 					}
 				}

@@ -28,7 +28,8 @@ public abstract class Node {
 	private AffineTransform transform;
 	private double rotation = 0;
 	private double scaleX = 1,scaleY = 1;
-
+	private ContextInfo context;
+	
 	public Point initPosition;
 	public Point finalPosition;	
 	public boolean visible = true;
@@ -37,13 +38,13 @@ public abstract class Node {
 	public double thickness;
 	public Path2D path2d;
 	public Shape clip = null;
-	
+
 	public String s1;
 	public String s2 = "TimesRoman";
 	public boolean drawBounds = true;
 	public boolean fillInside = false;
-	
-	public Context context;
+
+
 
 	public Node() {
 		// TODO Auto-generated constructor stub
@@ -51,13 +52,13 @@ public abstract class Node {
 		finalPosition = new Point();
 		transform = new AffineTransform();
 		children = new ArrayList<>();
-		System.out.println("Node " + boundsColor);
+		context = new ContextInfo();
 	}
-	
-/**
- * 
- * @param b
- */
+
+	/**
+	 * 
+	 * @param b
+	 */
 	public void setVisible(boolean b) {
 		visible = b;
 	}
@@ -197,6 +198,26 @@ public abstract class Node {
 		transform.concatenate(AffineTransform.getTranslateInstance(initPosition.x, initPosition.y));
 		transform.concatenate(AffineTransform.getRotateInstance(rotation));
 		transform.concatenate(AffineTransform.getScaleInstance(scaleX, scaleY));
+	}
+
+	public void setContext() {
+		context.initPosition = initPosition;
+		context.finalPosition = finalPosition;	
+		context.visible  = visible;
+		context.boundsColor = boundsColor;
+		context.filledColor = filledColor;
+		context.thickness = thickness;
+		context.path2d = path2d;
+		context.clip = clip;
+		context.drawBounds = drawBounds;
+		context.fillInside = fillInside;
+
+		context.s1 = s1;
+		context.s2 = s2;
+	}
+	
+	public ContextInfo getContext() {
+		return context;
 	}
 }
 
