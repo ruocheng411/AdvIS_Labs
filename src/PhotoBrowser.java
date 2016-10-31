@@ -59,7 +59,7 @@ public class PhotoBrowser extends JFrame{
 	String imageTools[] = { "line", "rect",  "circle", "oval", 
 			"roundrect", "pen","erase","text","color", "stroke","fillColor" };
 	String tipText[] = { "Line", "Rect",  "Circle", "Oval", 
-			"Roundrect", "Pen","Erase","Text","Border Color", "Thinck","Fill Color" };
+			"Roundrect", "Pen","Erase","Text","Border Color", "Thickness","Fill Color" };
 	JToggleButton[] imageButtons;
 	int[] toolIndex = {1,2,3,4,5,6,7,8,9,10};
 	ButtonGroup group = new ButtonGroup();

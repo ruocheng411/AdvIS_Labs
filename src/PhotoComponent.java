@@ -29,7 +29,7 @@ import node.RootNode;
  * Extends JComponent
  * open several photos but show an photo at one time
  * show the photo and its back
- * accept drawing and typing
+ * this component displays a single photo, and also provides a way to store and render annotations including text and drawn strokes
  */
 public class PhotoComponent extends JComponent {
 	BufferedImage image = null;
